@@ -9,4 +9,4 @@ class Settings():
         self.bgColor = (47, 47, 47)
 
         #ship shit
-        self.ship_speed_factor = 1.5
+        self.ship_speed_factor = 0.75
