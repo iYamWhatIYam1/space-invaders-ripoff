@@ -2,10 +2,10 @@ import sys, pygame
 from bullet import Bullet
 
 def fireBullet(gameSettings, screen, ship, bullets):
-        #lets make a bullet when space is pressed, and add it to the bullet group
-        if len(bullets) < gameSettings.bullets_allowed:
-            newBullet = Bullet(gameSettings, screen, ship)
-            bullets.add(newBullet)
+    #lets make a bullet when space is pressed, and add it to the bullet group
+    if len(bullets) < gameSettings.bullets_allowed:
+        newBullet = Bullet(gameSettings, screen, ship)
+        bullets.add(newBullet)
 
 def checkKeydownEvents(event, gameSettings, screen, ship, bullets):
     #checks for key presses
