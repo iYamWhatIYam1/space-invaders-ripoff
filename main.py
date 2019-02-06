@@ -7,13 +7,13 @@ import gameFunctions as gf
 def runGame():
     #runs the game and sets proper display resolution
     pygame.init()
-    ai_settings = Settings()
+    gameSettings = Settings()
     screen = pygame.display.set_mode(
-        (ai_settings.screen_width, ai_settings.screen_height) #imports screen resolution from settings.py
+        (gameSettings.screen_width, gameSettings.screen_height) #imports screen resolution from settings.py
     )
 
     #draws the ship on the screen, bottom center
-    ship = Ship(ai_settings, screen)
+    ship = Ship(gameSettings, screen)
 
     #store bullets in a group
     bullets = Group()
@@ -24,14 +24,14 @@ def runGame():
         pygame.display.set_caption("Space Invaders Ripoff") 
 
         #draw everything on screen constantly
-        screen.fill(ai_settings.bgColor)
-        ship.blitme()
+        screen.fill(gameSettings.bgColor)
+        ship.blit()
 
         #updates the ship based on real-time occurences in-game
-        gf.checkEvents(ai_settings, screen, ship, bullets)
+        gf.checkEvents(gameSettings, screen, ship, bullets)
         ship.update()
         gf.updateBullets(bullets)
-        gf.update_screen(ai_settings, screen, ship, bullets)
+        gf.updateScreen(gameSettings, screen, ship, bullets)
 
         #drawing the most recent screen refresh
         pygame.display.flip()

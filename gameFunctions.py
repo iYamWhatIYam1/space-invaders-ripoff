@@ -1,42 +1,42 @@
 import sys, pygame
 from bullet import Bullet
 
-def fireBullet(ai_settings, screen, ship, bullets):
+def fireBullet(gameSettings, screen, ship, bullets):
         #lets make a bullet when space is pressed, and add it to the bullet group
-        if len(bullets) < ai_settings.bullets_allowed:
-            newBullet = Bullet(ai_settings, screen, ship)
+        if len(bullets) < gameSettings.bullets_allowed:
+            newBullet = Bullet(gameSettings, screen, ship)
             bullets.add(newBullet)
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def checkKeydownEvents(event, gameSettings, screen, ship, bullets):
     #checks for key presses
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
     elif event.key == pygame.K_LEFT:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        fireBullet(ai_settings, screen, ship, bullets)
+        fireBullet(gameSettings, screen, ship, bullets)
 
-def check_keyup_events(event, ship):
+def checkKeyupEvents(event, ship):
     #checks for key releases
     if event.key == pygame.K_RIGHT:
         ship.moving_right = False
     elif event.key == pygame.K_LEFT:
         ship.moving_left = False
     
-def checkEvents(ai_settings, screen, ship, bullets):
+def checkEvents(gameSettings, screen, ship, bullets):
     #this responds to keystrokes and mouse input
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            checkKeydownEvents(event, gameSettings, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
-            check_keyup_events(event, ship)
+            checkKeyupEvents(event, ship)
 
-def update_screen(ai_settings, screen, ship, bullets):
+def updateScreen(gameSettings, screen, ship, bullets):
     #redraw the screen constantly
-    screen.fill(ai_settings.bgColor)
-    ship.blitme()
+    screen.fill(gameSettings.bgColor)
+    ship.blit()
 
     #draw bullets on-screen
     for bullet in bullets.sprites():

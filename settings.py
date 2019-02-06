@@ -1,8 +1,8 @@
 class Settings():
-    """this is where the stuff for this ripoff is stored. lmao."""
+    #stores game settings, like screen resolution and ship speed
 
     def __init__(self):
-        """initialize game's settings"""
+        #initialize game's settings
         #screen resolution
         self.screen_width = 640
         self.screen_height = 480
