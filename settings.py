@@ -3,10 +3,16 @@ class Settings():
 
     def __init__(self):
         """initialize game's settings"""
-        #screen settings
+        #screen resolution
         self.screen_width = 640
         self.screen_height = 480
         self.bgColor = (47, 47, 47)
 
-        #ship shit
+        #bullet settings
+        self.bullet_speed_factor = 0.75
+        self.bullet_width = 8
+        self.bullet_height = 16
+        self.bullet_color = 255, 255, 255
+
+        #ship's speed
         self.ship_speed_factor = 0.75
