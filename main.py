@@ -30,7 +30,7 @@ def runGame():
         #updates the ship based on real-time occurences in-game
         gf.checkEvents(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
+        gf.updateBullets(bullets)
         gf.update_screen(ai_settings, screen, ship, bullets)
 
         #drawing the most recent screen refresh
