@@ -22,7 +22,7 @@ class Ship():
         self.moving_left = False
 
     def update(self):
-        #update the ship's position based onthe movement flag. update center values of the ship and NOT rect
+        #update the ship's position based on the movement flag. update center values of the ship and NOT rect
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.gameSettings.ship_speed_factor
         if self.moving_left and self.rect.left > 0:
