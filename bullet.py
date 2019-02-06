@@ -2,8 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 
 class Bullet(Sprite):
-    """this class manages bullets fired from the ship"""
-
+    #this class manages bullets fired from the ship
     def __init__(self, gameSettings, screen, ship):
         #bullet object at the ship's current spot on screen
         super(Bullet, self).__init__()

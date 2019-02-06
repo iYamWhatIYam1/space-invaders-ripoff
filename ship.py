@@ -1,7 +1,6 @@
 import pygame
 
 class Ship():
-
     def __init__(self, gameSettings, screen):
         """this is where the ship will start off at"""
         self.screen = screen
