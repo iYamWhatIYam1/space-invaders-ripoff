@@ -15,6 +15,8 @@ def checkKeydownEvents(event, gameSettings, screen, ship, bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fireBullet(gameSettings, screen, ship, bullets)
+    elif event.key == pygame.K_ESCAPE:
+        sys.quit()
 
 def checkKeyupEvents(event, ship):
     #checks for key releases
