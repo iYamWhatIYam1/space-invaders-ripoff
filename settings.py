@@ -17,3 +17,9 @@ class Settings():
 
         #ship's speed
         self.ship_speed_factor = 0.75
+
+        #alien speed settings
+        self.alien_speed_factor = 0.5
+        self.fleet_drop_speed = 10
+        #fleet direction: 1 goes right, -1 goes left
+        self.fleet_direction = 1

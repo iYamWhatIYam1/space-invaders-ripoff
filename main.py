@@ -2,6 +2,7 @@ import sys, pygame
 from pygame.sprite import Group
 from settings import Settings
 from ship import Ship
+from alien import Alien
 import gameFunctions as gf
 
 def runGame():
@@ -12,16 +13,18 @@ def runGame():
         (gameSettings.screen_width, gameSettings.screen_height) #imports screen resolution from settings.py
     )
 
-    #draws the ship on the screen, bottom center
+    #draws the ship on the screen, creates a group of bullets, and a group of aliens
     ship = Ship(gameSettings, screen)
-
-    #store bullets in a group
     bullets = Group()
+    aliens = Group()
+
+    #create first fleet of aliens
+    gf.createFleet(gameSettings, screen, ship, aliens)
 
     #main loop for the game
     while True:
         #window title
-        pygame.display.set_caption("Space Invaders Ripoff") 
+        pygame.display.set_caption("Space Invaders Ripoff")
 
         #draw everything on screen constantly
         screen.fill(gameSettings.bgColor)
@@ -31,7 +34,8 @@ def runGame():
         gf.checkEvents(gameSettings, screen, ship, bullets)
         ship.update()
         gf.updateBullets(bullets)
-        gf.updateScreen(gameSettings, screen, ship, bullets)
+        gf.updateAliens(gameSettings, aliens)
+        gf.updateScreen(gameSettings, screen, ship, aliens, bullets)
 
         #drawing the most recent screen refresh
         pygame.display.flip()
