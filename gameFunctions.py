@@ -48,9 +48,11 @@ def updateScreen(gameSettings, screen, ship, aliens, bullets):
     
     ship.blit()
 
-def updateBullets(bullets):
-    #lets update our bullet positions
+def updateBullets(aliens, bullets):
+    #lets update our bullet positions and get rid of old ones
     bullets.update()
+    #let's see if any bullets have hit any aliens. if so, delete them and kill the alien it hit
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
     #lets trash bullets that are off-screen
     for bullet in bullets.copy():

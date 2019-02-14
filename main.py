@@ -33,7 +33,7 @@ def runGame():
         #updates the ship based on real-time occurences in-game
         gf.checkEvents(gameSettings, screen, ship, bullets)
         ship.update()
-        gf.updateBullets(bullets)
+        gf.updateBullets(aliens, bullets)
         gf.updateAliens(gameSettings, aliens)
         gf.updateScreen(gameSettings, screen, ship, aliens, bullets)
 
