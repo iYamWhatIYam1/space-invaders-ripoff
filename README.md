@@ -7,4 +7,5 @@ The bare minimum feature set will include:
 - an alien wave that progresses towards the player faster and faster as time goes on
 - ability to exit with the Escape key
 - a title screen that is used with the mouse
+
 Hopefully you enjoy what I have here!
