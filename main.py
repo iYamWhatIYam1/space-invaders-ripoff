@@ -36,9 +36,12 @@ def runGame():
 
         #updates the ship based on real-time occurences in-game
         gf.checkEvents(gameSettings, screen, ship, bullets)
-        ship.update()
-        gf.updateBullets(gameSettings, screen, ship, aliens, bullets)
-        gf.updateAliens(gameSettings, stats, screen, ship, aliens, bullets)
+
+        if stats.gameActive:
+            ship.update()
+            gf.updateBullets(gameSettings, screen, ship, aliens, bullets)
+            gf.updateAliens(gameSettings, stats, screen, ship, aliens, bullets)
+
         gf.updateScreen(gameSettings, screen, ship, aliens, bullets)
 
         #drawing the most recent screen refresh

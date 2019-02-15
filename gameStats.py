@@ -11,3 +11,6 @@ class gameStats():
     def resetStats(self):
         #initialize statistics that can change in-game
         self.shipsLeft = self.gameSettings.shipsLeft
+
+        #start the game in an active state
+        self.gameActive = True
