@@ -5,7 +5,7 @@ class Settings():
         #initialize game's settings
         #screen resolution
         self.screen_width = 640
-        self.screen_height = 480
+        self.screen_height = 560
         self.bgColor = (47, 47, 47)
 
         #bullet settings
@@ -15,8 +15,9 @@ class Settings():
         self.bullet_color = 255, 255, 255
         self.bullets_allowed = 3
 
-        #ship's speed
+        #ship settings
         self.ship_speed_factor = 0.75
+        self.shipsLeft = 3
 
         #alien speed settings
         self.alien_speed_factor = 0.5

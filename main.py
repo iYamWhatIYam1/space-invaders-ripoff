@@ -4,6 +4,7 @@ from settings import Settings
 from ship import Ship
 from alien import Alien
 import gameFunctions as gf
+from gameStats import gameStats
 
 def runGame():
     #runs the game and sets proper display resolution
@@ -12,6 +13,9 @@ def runGame():
     screen = pygame.display.set_mode(
         (gameSettings.screen_width, gameSettings.screen_height) #imports screen resolution from settings.py
     )
+
+    #create an instance to store the game's stats
+    stats = gameStats(gameSettings)
 
     #draws the ship on the screen, creates a group of bullets, and a group of aliens
     ship = Ship(gameSettings, screen)
@@ -33,8 +37,8 @@ def runGame():
         #updates the ship based on real-time occurences in-game
         gf.checkEvents(gameSettings, screen, ship, bullets)
         ship.update()
-        gf.updateBullets(aliens, bullets)
-        gf.updateAliens(gameSettings, aliens)
+        gf.updateBullets(gameSettings, screen, ship, aliens, bullets)
+        gf.updateAliens(gameSettings, stats, screen, ship, aliens, bullets)
         gf.updateScreen(gameSettings, screen, ship, aliens, bullets)
 
         #drawing the most recent screen refresh
