@@ -5,6 +5,7 @@ from ship import Ship
 from alien import Alien
 import gameFunctions as gf
 from gameStats import gameStats
+from button import Button
 
 def runGame():
     #runs the game and sets proper display resolution
@@ -30,19 +31,22 @@ def runGame():
         #window title
         pygame.display.set_caption("Space Invaders Ripoff")
 
+        #draw the play button
+        playButton = Button(gameSettings, screen, "PLAY")
+
         #draw everything on screen constantly
         screen.fill(gameSettings.bgColor)
         ship.blit()
 
         #updates the ship based on real-time occurences in-game
-        gf.checkEvents(gameSettings, screen, ship, bullets)
+        gf.checkEvents(gameSettings, screen, stats, playButton, ship, aliens, bullets)
 
         if stats.gameActive:
             ship.update()
             gf.updateBullets(gameSettings, screen, ship, aliens, bullets)
             gf.updateAliens(gameSettings, stats, screen, ship, aliens, bullets)
 
-        gf.updateScreen(gameSettings, screen, ship, aliens, bullets)
+        gf.updateScreen(gameSettings, screen, stats, ship, aliens, bullets, playButton)
 
         #drawing the most recent screen refresh
         pygame.display.flip()

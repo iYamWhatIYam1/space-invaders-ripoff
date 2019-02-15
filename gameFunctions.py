@@ -28,7 +28,7 @@ def checkKeyupEvents(event, ship):
     elif event.key == pygame.K_LEFT:
         ship.moving_left = False
     
-def checkEvents(gameSettings, screen, ship, bullets):
+def checkEvents(gameSettings, screen, stats, playButton, ship, aliens, bullets):
     #this responds to keystrokes and mouse input
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -37,8 +37,31 @@ def checkEvents(gameSettings, screen, ship, bullets):
             checkKeydownEvents(event, gameSettings, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
             checkKeyupEvents(event, ship)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            checkPlayButton(gameSettings, screen, stats, playButton, ship, aliens, bullets, mouse_x, mouse_y)
 
-def updateScreen(gameSettings, screen, ship, aliens, bullets):
+def checkPlayButton(gameSettings, screen, stats, playButton, ship, aliens, bullets, mouse_x, mouse_y):
+    #start game when player clicks PLAY
+    buttonClicked = playButton.rect.collidepoint(mouse_x, mouse_y)
+    if buttonClicked and not stats.gameActive:
+        #reset game statistics and settings
+        stats.resetStats()
+        stats.gameActive = True
+        gameSettings.initializeDynamicSettings()
+
+        #empty list of aliens and bullets
+        aliens.empty()
+        bullets.empty()
+
+        #create new fleet and center the ship
+        createFleet(gameSettings, screen, ship, aliens)
+        ship.centerShip()
+
+        #hide mouse
+        pygame.mouse.set_visible(False)
+
+def updateScreen(gameSettings, screen, stats, ship, aliens, bullets, playButton):
     #redraw the screen constantly
     screen.fill(gameSettings.bgColor)
     ship.blit()
@@ -49,6 +72,10 @@ def updateScreen(gameSettings, screen, ship, aliens, bullets):
         bullet.drawBullet()
     
     ship.blit()
+
+    #do not draw play button if game is inactive!
+    if not stats.gameActive:
+        playButton.drawButton()
 
 def getNumberAliens_X(gameSettings, alienWidth):
     #find number of aliens that fit in a row.
@@ -103,8 +130,9 @@ def checkBulletAlienCollisions(gameSettings, screen, ship, aliens, bullets):
 
     #create a new fleet, get rid of all on-screen bullets when current fleet is wiped out
     if len(aliens) == 0:
-        #destroy all existing bullets and create a new fleet
+        #destroy all existing bullets and create a new fleet, as well as speed up the game
         bullets.empty()
+        gameSettings.increaseSpeed()
         createFleet(gameSettings, screen, ship, aliens)
 
 def changeFleetDirection(gameSettings, aliens):
@@ -135,9 +163,10 @@ def shipHit(gameSettings, stats, screen, ship, aliens, bullets):
 
         #pause the game for a brief moment
         sleep(0.5)
-        
+
     else:
         stats.gameActive = False
+        pygame.mouse.set_visible(True)
 
 def checkAliensBottom(gameSettings, stats, screen, ship, aliens, bullets):
     #check if any aliens have reached the bottom of the screen
